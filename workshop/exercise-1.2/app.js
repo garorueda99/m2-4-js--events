@@ -21,3 +21,50 @@
 // Stretch goal
 // Make the countdown live (show a countdown that updates several times a
 // second)
+
+const BODY = document.querySelector("body");
+const SPANTIMETAG = document.querySelector("#time");
+console.log(SPANTIMETAG);
+const MAINDIV = document.createElement("div");
+MAINDIV.innerHTML = "WINNER!!!";
+let textCount = 5;
+let progressTime = 0;
+
+function play() {
+  const WINDOWS = document.addEventListener("click", () => {
+    if (progressTime < 5000) {
+      document.body.style.backgroundColor = getRandomColor();
+      BODY.appendChild(MAINDIV);
+      MAINDIV.style.fontSize = "50px";
+      progressStop();
+    }
+  });
+  progress = setInterval(progressCount, 1000);
+}
+
+function getRandomColor() {
+  var letters = "0123456789ABCDEF";
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+function progressStop() {
+  clearInterval(progress);
+}
+
+function progressCount() {
+  progressTime += 1000;
+  SPANTIMETAG.innerHTML = textCount.toString() + " s";
+  // console.log(textCount, progressTime);
+  if (progressTime >= 5000) {
+    MAINDIV.innerHTML = "GAME OVER";
+    BODY.appendChild(MAINDIV);
+    progressStop();
+  }
+  textCount--;
+}
+
+play();

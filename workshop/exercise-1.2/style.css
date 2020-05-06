@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #87ceeb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: larger;
+  color: white;
+  flex-direction: column;
+}
