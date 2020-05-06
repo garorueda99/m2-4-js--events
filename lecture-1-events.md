@@ -1,3 +1,11 @@
+import mdxTheme from '../../theme';
+export const theme = mdxTheme;
+
+import fig1Event from './assets/fig1_event.png';
+import eventTypes from './assets/event_types.jpg';
+import door from './assets/door.gif';
+import propBubble from './assets/propagation_bubbling.png';
+
 # 2.4.1 - JS Events
 
 ---
@@ -6,13 +14,13 @@
 
 Open the door, when someone is there.
 
-<img src="assets/door.gif" />
+<img src={door} />
 
 ---
 
 ## Event-driven Programming
 
-<img src="assets/fig1_event.png" />
+<img src={fig1Event} />
 
 ---
 
