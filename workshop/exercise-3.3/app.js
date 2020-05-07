@@ -1,16 +1,14 @@
-const BODY = document.querySelector("body");
-const GRID = document.createElement("div");
-GRID.classList = "grid-container";
-BODY.appendChild(GRID);
-
 for (let i = 1; i <= 20; i++) {
   const CELL = document.createElement("button");
   CELL.classList = `grid-item`;
   CELL.id = `cell-${i}`;
   CELL.innerHTML = `${i}`;
-  GRID.appendChild(CELL);
   CELL.dataset.key = "off";
   CELL.addEventListener("click", clickColor);
+  CELL.style.position = "absolute";
+  CELL.style.left = `${Math.floor(Math.random() * 101)}%`;
+  CELL.style.top = `${Math.floor(Math.random() * 101)}%`;
+  document.body.appendChild(CELL);
 }
 
 // for (let i = 1; i <= 20; i++) {

@@ -6,8 +6,10 @@ const STOPTIMER = document.querySelector("#stopTimer");
 const RESETTIMER = document.querySelector("#resetTimer");
 const INPUTTIMEMIN = document.querySelector("#min");
 const INPUTTIMESEC = document.querySelector("#sec");
+const CHIME = document.createElement("AUDIO");
 const stopwatchDiv = document.querySelector("#stopwatch");
 const timerDiv = document.querySelector("#timer");
+CHIME.src = "chime.mp3";
 let totalSeconds = 0;
 let totalMinutes;
 let totalHours;
@@ -61,6 +63,7 @@ setInterval(setDate, 1000);
 START.addEventListener("click", onClickStart);
 STOP.addEventListener("click", onClickStop);
 RESET.addEventListener("click", onClickReset);
+
 function onClickStart() {
   time = setInterval(() => {
     stopWatch += 100;
@@ -82,21 +85,23 @@ function SecondsToTime(sec) {
   let minutes = "00";
   let seconds = "00";
   let milisec = "00";
-  milisec = sec.toString();
-  milisec = milisec[milisec.length - 3] + "0";
-  seconds = Math.round(sec / 1000);
-  if (seconds >= 60) {
-    seconds = Math.round(((seconds / 60) % 1) * 60);
-  }
-  seconds = seconds.toString();
-  if (seconds.length === 1) {
-    seconds = "0" + seconds;
-  }
+  if (sec > 0) {
+    milisec = sec.toString();
+    milisec = milisec[milisec.length - 3] + "0";
+    seconds = Math.round(sec / 1000);
+    if (seconds >= 60) {
+      seconds = Math.round(((seconds / 60) % 1) * 60);
+    }
+    seconds = seconds.toString();
+    if (seconds.length === 1) {
+      seconds = "0" + seconds;
+    }
 
-  minutes = Math.floor(sec / 1000 / 60 + 1 / 120);
-  minutes = minutes.toString();
-  if (minutes.length === 1) {
-    minutes = "0" + minutes;
+    minutes = Math.floor(sec / 1000 / 60 + 1 / 120);
+    minutes = minutes.toString();
+    if (minutes.length === 1) {
+      minutes = "0" + minutes;
+    }
   }
   return `${minutes}: ${seconds}: ${milisec} `;
 }
@@ -108,10 +113,19 @@ RESETTIMER.addEventListener("click", onClickResetTimer);
 function onClickStartTimer() {
   initialTime = INPUTTIMEMIN.value * 60 * 1000 + INPUTTIMESEC.value * 1000;
   console.log(initialTime);
-  if (initialTime != 0) {
+  if (initialTime >= 0) {
     time2 = setInterval(() => {
-      timerDiv.innerHTML = SecondsToTime(initialTime);
       initialTime -= 100;
+      console.log(initialTime);
+      timerDiv.innerHTML = SecondsToTime(initialTime);
+      if (initialTime <= 0) {
+        document.body.appendChild(CHIME);
+        CHIME.play();
+        clearInterval(time2);
+        setTimeout(function () {
+          alert("Time's Up!!!");
+        }, 100);
+      }
     }, 100);
   }
 }
