@@ -51,6 +51,9 @@ function start() {
       setTimeout(function () {
         alert("Time's Up!!!");
       }, 0);
+      for (let i = 0; i < ALLBUTTONS.length; i++) {
+        ALLBUTTONS[i].removeEventListener("click", clickColor);
+      }
     } else {
       console.log("Keep Going!!");
       let win = true;
@@ -59,7 +62,6 @@ function start() {
           win = false;
         }
       }
-      console.log(win);
       if (win) {
         clearInterval(time);
         TIMERFRAME.removeChild(TIMER);
